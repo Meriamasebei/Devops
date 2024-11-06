@@ -49,7 +49,14 @@ public class SkierServicesImpl implements ISkierServices {
     public Skier assignSkierToSubscription(Long numSkier, Long numSubscription) {
         Skier skier = skierRepository.findById(numSkier).orElse(null);
         Subscription subscription = subscriptionRepository.findById(numSubscription).orElse(null);
-        assert skier != null;
+
+        if (skier == null) {
+            throw new IllegalArgumentException("Skier with ID " + numSkier + " not found.");
+        }
+        if (subscription == null) {
+            throw new IllegalArgumentException("Subscription with ID " + numSubscription + " not found.");
+        }
+
         skier.setSubscription(subscription);
         return skierRepository.save(skier);
     }
@@ -81,7 +88,8 @@ public class SkierServicesImpl implements ISkierServices {
         Skier skier = skierRepository.findById(numSkieur).orElse(null);
         Piste piste = pisteRepository.findById(numPiste).orElse(null);
         try {
-            assert skier != null;
+
+            if (skier == null) throw new AssertionError();
             skier.getPistes().add(piste);
         } catch (NullPointerException exception) {
             Set<Piste> pisteList = new HashSet<>();

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.services.ICourseServices;
+import tn.esprit.spring.tdo.CourseDTO;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class CourseRestController {
     @Operation(description = "Add Course")
     @PostMapping("/add")
     public Course addCourse(@RequestBody Course course){
-        return  courseServices.addCourse(course);
+        return  courseServices.addCourse((CourseDTO) course);
     }
 
     @Operation(description = "Retrieve all Courses")
@@ -32,7 +33,7 @@ public class CourseRestController {
     @Operation(description = "Update Course ")
     @PutMapping("/update")
     public Course updateCourse(@RequestBody Course course){
-        return  courseServices.updateCourse(course);
+        return  courseServices.updateCourse((CourseDTO) course);
     }
 
     @Operation(description = "Retrieve Course by Id")

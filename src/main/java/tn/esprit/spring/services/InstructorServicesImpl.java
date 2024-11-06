@@ -15,6 +15,7 @@ import java.util.Set;
 @Service
 public class InstructorServicesImpl implements IInstructorServices{
 
+
     private IInstructorRepository instructorRepository;
     private ICourseRepository courseRepository;
 
@@ -46,6 +47,5 @@ public class InstructorServicesImpl implements IInstructorServices{
         instructor.setCourses(courseSet);
         return instructorRepository.save(instructor);
     }
-
 
 }
